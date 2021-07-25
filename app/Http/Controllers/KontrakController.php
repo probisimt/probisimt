@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Logistic;
+use App\Imports\KontrakImport;
+use App\Models\Kontrak;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
-class LogisticController extends Controller
+class KontrakController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,8 @@ class LogisticController extends Controller
      */
     public function index()
     {
-        return view('logistic.index');
+        $data = Kontrak::Paginate(10);
+        return view('kontrak.index',compact('data'));
     }
 
     /**
@@ -41,10 +44,10 @@ class LogisticController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Logistic  $logistic
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Logistic $logistic)
+    public function show($id)
     {
         //
     }
@@ -52,10 +55,10 @@ class LogisticController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Logistic  $logistic
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Logistic $logistic)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +67,10 @@ class LogisticController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Logistic  $logistic
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Logistic $logistic)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,11 +78,19 @@ class LogisticController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Logistic  $logistic
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Logistic $logistic)
+    public function destroy($id)
     {
         //
+    }
+
+    public function importkontrak()
+    {
+
+
+        Excel::import(new KontrakImport,request()->file('file'));
+        return redirect()->back();
     }
 }

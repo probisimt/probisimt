@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLogisticsTable extends Migration
+class CreateKontraksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLogisticsTable extends Migration
      */
     public function up()
     {
-        Schema::create('logistics', function (Blueprint $table) {
+        Schema::create('kontraks', function (Blueprint $table) {
             $table->id();
             $table->string('supplier');
             $table->string('po_direct');
@@ -31,6 +31,6 @@ class CreateLogisticsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logistics');
+        Schema::dropIfExists('kontraks');
     }
 }

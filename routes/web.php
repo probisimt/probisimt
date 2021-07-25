@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LogisticController;
+use App\Http\Controllers\ImportexportController;
+use App\Http\Controllers\KontrakController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,13 @@ use App\Http\Controllers\LogisticController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('export', [ImportexportController::class,'export'])->name('export');
+Route::get('import-export-view', [ImportexportController::class,'index']);
+Route::post('import', [ImportexportController::class,'import'])->name('import');
 
-Route::resource('logistic', LogisticController::class);
+
+Route::get('kontrak', [KontrakController::class,'index']);
+Route::post('/importkontrak', [KontrakController::class,'importkontrak'])->name('importkontrak');
+
+
 
